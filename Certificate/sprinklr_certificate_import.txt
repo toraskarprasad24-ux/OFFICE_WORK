@@ -1,0 +1,17 @@
+
+-------------------------------------------------------------------------------------
+15/04/2025 JDK UPDATE
+
+D:\java_441\jre\bin>
+keytool -import -trustcacerts -file "D:\PRM_PROD\PRM_PROD_CARD_SPRINKLR\Certificate\OBP SSL CERTIFICATE.cer" -alias sprinklrcert -keystore "D:\java_441\jre\lib\security\cacerts"
+
+Password is .
+
+To check cert in cacert:-
+keytool -list -v -keystore "D:\java_441\jre\lib\security\cacerts" -alias sprinklrcert
+
+To delete cert from cacert:-
+keytool -delete -alias sprinklrcert -keystore "D:\jdk1.8.0_441\jre\lib\security\cacerts"
+
+Path->D:\java_441\jre\lib\security\cacerts
+

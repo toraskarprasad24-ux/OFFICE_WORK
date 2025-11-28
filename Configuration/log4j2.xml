@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+	<Properties>
+		<Property name="basePath">logs/</Property>
+		<Property name="filePattern">%d{yyyy-MM-dd}</Property>
+		<!-- INFO/TRACE -->
+		<Property name="log_level">INFO</Property>
+	</Properties>
+
+	<Appenders>
+
+		<RollingFile name="infonly"
+			filePattern="${basePath}/AuditLogs/Audit_${filePattern}.log">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%F %L] - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="warn" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="error" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="fatal" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+
+				<!-- Then accept info, warn, error, fatal and deny debug/trace -->
+				<ThresholdFilter level="info" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+
+		<RollingFile name="warnonly"
+			filePattern="${basePath}/ActivityLogs/Activity_${filePattern}.log">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%F %L] - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="error" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="fatal" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+
+				<!-- Then accept info, warn, error, fatal and deny debug/trace -->
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+
+		<RollingFile name="erroronly"
+			filePattern="${basePath}/ErrorLogs/Error_${filePattern}.log">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%F %L] - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+			<Filters>
+
+				<ThresholdFilter level="error" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+		<RollingFile name="traceonly"
+			filePattern="${basePath}/TraceLogs/Trace_${filePattern}.log">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%F %L] - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+			<Filters>
+				<Filters>
+					<ThresholdFilter level="info" onMatch="DENY"
+						onMismatch="NEUTRAL" />
+					<ThresholdFilter level="warn" onMatch="DENY"
+						onMismatch="NEUTRAL" />
+					<ThresholdFilter level="error" onMatch="DENY"
+						onMismatch="NEUTRAL" />
+					<ThresholdFilter level="fatal" onMatch="DENY"
+						onMismatch="NEUTRAL" />
+
+					<!-- accept trace -->
+					<ThresholdFilter level="trace" onMatch="ACCEPT"
+						onMismatch="DENY" />
+				</Filters>
+			</Filters>
+		</RollingFile>
+
+		<!-- <Console name="console" target="SYSTEM_OUT"> <PatternLayout pattern="%d{yyyy-MM-dd 
+			HH:mm:ss} %-5p %c{1}:%L - %m%n" /> </Console> -->
+	</Appenders>
+
+
+	<Loggers>
+		<Logger name="AppLogger" level="${log_level}"
+			additivity="false">
+			<appender-ref ref="infonly" />
+			<appender-ref ref="warnonly" />
+			<appender-ref ref="erroronly" />
+			<appender-ref ref="traceonly" />
+
+			<!-- <AppenderRef ref="console" /> -->
+		</Logger>
+
+		<Root level="error">
+
+			<AppenderRef ref="infonly" />
+			<AppenderRef ref="warnonly" />
+			<appender-ref ref="erroronly" />
+			<appender-ref ref="traceonly" />
+
+
+
+			<!-- <AppenderRef ref="console" /> -->
+		</Root>
+	</Loggers>
+
+</Configuration>
