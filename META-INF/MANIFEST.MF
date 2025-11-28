@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: com.concerto.sprinklr.application.init.ServerInitializer
+Class-Path: lib/slf4j-api-1.7.30.jar lib/log4j-slf4j-impl-2.19.0.jar lib
+ /log4j-api-2.19.0.jar lib/log4j-core-2.19.0.jar lib/log4j-jul-2.19.0.ja
+ r lib/http-request-3.0.jar lib/httpclient-4.5.2.jar lib/httpcore-4.4.ja
+ r lib/jackson-all-1.9.0.jar lib/json-20230618.jar lib/json-simple-1.1.j
+ ar lib/ojdbc8.jar lib/spring-beans-5.3.2.jar lib/spring-core-5.3.2.jar 
+ lib/spring-web-5.3.2.jar lib/ucp.jar lib/commons-logging-1.2.jar
+
